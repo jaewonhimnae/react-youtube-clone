@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 var ffmpeg = require('fluent-ffmpeg');
 
-const { User } = require("../models/User");
+const { Video } = require("../models/Video");
 
 const { auth } = require("../middleware/auth");
 
@@ -75,6 +75,22 @@ router.post("/thumbnail", (req, res) => {
         });
 
 });
+
+
+
+router.post("/uploadVideo", (req, res) => {
+
+    const video = new Video(req.body)
+
+    video.save((err, video) => {
+        if(err) return res.status(400).json({ success: false, err })
+        return res.status(200).json({
+            success: true 
+        })
+    })
+
+});
+
 
 
 
