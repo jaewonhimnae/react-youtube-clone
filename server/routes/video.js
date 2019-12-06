@@ -78,6 +78,20 @@ router.post("/thumbnail", (req, res) => {
 
 
 
+
+router.get("/getVideos", (req, res) => {
+
+    Video.find()
+        .populate('writer')
+        .exec((err, videos) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+
+});
+
+
+
 router.post("/uploadVideo", (req, res) => {
 
     const video = new Video(req.body)
