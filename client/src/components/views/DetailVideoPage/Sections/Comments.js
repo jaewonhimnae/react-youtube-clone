@@ -1,7 +1,8 @@
-import React , {useState}from 'react'
+import React, { useState } from 'react'
 import { Button, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import SingleComment from './SingleComment';
 
 const { TextArea } = Input;
 
@@ -16,21 +17,21 @@ function Comments(props) {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        const variables = { 
+        const variables = {
             content: Comment,
             writer: user.userData._id,
-            postId: props.postId   
-         }
+            postId: props.postId
+        }
 
         axios.post('/api/comment/saveComment', variables)
-        .then(response=> {
-            if(response.data.success) {
-                setComment("")
-                props.refreshFunction(response.data.result)
-            } else {
-                alert('Failed to save Comment')
-            }
-        })
+            .then(response => {
+                if (response.data.success) {
+                    setComment("")
+                    props.refreshFunction(response.data.result)
+                } else {
+                    alert('Failed to save Comment')
+                }
+            })
     }
 
     return (
@@ -40,6 +41,16 @@ function Comments(props) {
             <hr />
             {/* Comment Lists  */}
             {console.log(props.CommentLists)}
+
+            {props.CommentLists && props.CommentLists.map((comment, index) => (
+                (!comment.responseTo &&
+                    <React.Fragment>
+                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                    </React.Fragment>
+                )
+            ))}
+
+
 
             {/* Root Comment Form */}
             <form style={{ display: 'flex' }} onSubmit={onSubmit}>
