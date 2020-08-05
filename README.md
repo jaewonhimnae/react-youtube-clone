@@ -1,8 +1,3 @@
-react-youtube-clone is being sponsored by the following tool <br />
-Please help to support us by taking a look and signing up to a free trial
-<a href="https://tracking.gitads.io/?repo=react-youtube-clone"><img src="https://images.gitads.io/react-youtube-clone" alt="GitAds"/></a> 
-
-
 Hello, My Friends  
 Thank you for having interest in this repository ! 
 
